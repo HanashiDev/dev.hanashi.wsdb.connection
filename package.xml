@@ -21,4 +21,8 @@
 		<excludedpackage version="6.3.0 Alpha 1">com.woltlab.wcf</excludedpackage>
 		<excludedpackage version="6.3.0 Alpha 1">com.woltlab.wsdb</excludedpackage>
 	</excludedpackages>
+	<instructions type="install">
+		<instruction type="file"/>
+		<instruction type="database">acp/database/install_dev.hanashi.wsdb.connection.php</instruction>
+	</instructions>
 </package>
