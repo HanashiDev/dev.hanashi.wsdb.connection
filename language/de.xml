@@ -8,8 +8,8 @@
 			<item name="dev.hanashi.wsdb.connection.alreadyConnected"><![CDATA[Dieser Eintrag ist bereits mit dem aktuellen Eintrag verbunden.]]></item>
 		</category>
 		<category name="wsdb.record">
-			<item name="wsdb.record.connection.add"><![CDATA[Verweis hinzufügen]]></item>
-			<item name="wsdb.record.connections"><![CDATA[Verweise]]></item>
+			<item name="wsdb.record.connection.add"><![CDATA[Verbindung hinzufügen]]></item>
+			<item name="wsdb.record.connections"><![CDATA[Verbindungen]]></item>
 		</category>
 	</import>
 </language>
