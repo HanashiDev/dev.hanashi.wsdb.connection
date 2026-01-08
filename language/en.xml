@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/6.0/language.xsd" languagecode="en" languagename="English" countrycode="gb">
+	<import>
+		<category name="dev.hanashi.wsdb">
+			<item name="dev.hanashi.wsdb.connection.enableConnection"><![CDATA[Enable connections]]></item>
+			<item name="dev.hanashi.wsdb.connection.noRecords"><![CDATA[There are currently no selectable entries for the selected database.]]></item>
+			<item name="dev.hanashi.wsdb.connection.record"><![CDATA[Record]]></item>
+			<item name="dev.hanashi.wsdb.connection.alreadyConnected"><![CDATA[This entry is already linked to the current entry.]]></item>
+		</category>
+		<category name="wsdb.record">
+			<item name="wsdb.record.connection.add"><![CDATA[Add connection]]></item>
+			<item name="wsdb.record.connections"><![CDATA[Connections]]></item>
+		</category>
+	</import>
+</language>

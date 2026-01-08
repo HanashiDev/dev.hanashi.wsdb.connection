@@ -2,10 +2,12 @@
 
 use wcf\system\database\table\column\NotNullInt10DatabaseTableColumn;
 use wcf\system\database\table\column\ObjectIdDatabaseTableColumn;
+use wcf\system\database\table\column\TinyintDatabaseTableColumn;
 use wcf\system\database\table\DatabaseTable;
 use wcf\system\database\table\index\DatabaseTableForeignKey;
 use wcf\system\database\table\index\DatabaseTableIndex;
 use wcf\system\database\table\index\DatabaseTablePrimaryIndex;
+use wcf\system\database\table\PartialDatabaseTable;
 
 return [
     DatabaseTable::create('wcf1_wsdb_record_connection')
@@ -44,5 +46,12 @@ return [
                 ->referencedTable('wcf1_wsdb_record')
                 ->referencedColumns(['recordID'])
                 ->onDelete('CASCADE'),
+        ]),
+    PartialDatabaseTable::create('wcf1_wsdb_database')
+        ->columns([
+            TinyintDatabaseTableColumn::create('enableConnection')
+                ->length(1)
+                ->notNull()
+                ->defaultValue(0),
         ]),
 ];

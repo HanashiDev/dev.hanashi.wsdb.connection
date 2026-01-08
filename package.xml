@@ -23,6 +23,10 @@
 	</excludedpackages>
 	<instructions type="install">
 		<instruction type="file"/>
+		<instruction type="template"/>
+		<instruction type="language"/>
+		<instruction type="eventListener"/>
 		<instruction type="database">acp/database/install_dev.hanashi.wsdb.connection.php</instruction>
+		<instruction type="script" run="standalone">acp/install_dev.hanashi.wsdb.connection.php</instruction>
 	</instructions>
 </package>
