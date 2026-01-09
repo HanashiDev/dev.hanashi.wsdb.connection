@@ -6,6 +6,7 @@
 			<item name="dev.hanashi.wsdb.connection.noRecords"><![CDATA[Für die ausgewählte Datenbank gibt es derzeitig keine auswählbaren Einträge.]]></item>
 			<item name="dev.hanashi.wsdb.connection.record"><![CDATA[Eintrag]]></item>
 			<item name="dev.hanashi.wsdb.connection.alreadyConnected"><![CDATA[Dieser Eintrag ist bereits mit dem aktuellen Eintrag verbunden.]]></item>
+			<item name="dev.hanashi.wsdb.connection.database"><![CDATA[Datenbank]]></item>
 		</category>
 		<category name="wsdb.record">
 			<item name="wsdb.record.connection.add"><![CDATA[Verbindung hinzufügen]]></item>

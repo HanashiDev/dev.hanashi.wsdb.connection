@@ -10,6 +10,7 @@ use wcf\data\wsdb\record\connection\RecordConnectionList;
 use wcf\data\wsdb\record\RecordList;
 use wcf\page\IWsdbPage;
 use wcf\page\TWsdbRecordPage;
+use wcf\page\WsdbConnectionListPage;
 use wcf\system\exception\PermissionDeniedException;
 use wcf\system\form\builder\container\FormContainer;
 use wcf\system\form\builder\data\processor\CustomFormDataProcessor;
@@ -21,6 +22,7 @@ use wcf\system\form\builder\field\validation\FormFieldValidator;
 use wcf\system\form\builder\IFormChildNode;
 use wcf\system\form\builder\IFormDocument;
 use wcf\system\request\LinkHandler;
+use wcf\system\WCF;
 use wcf\system\wsdb\page\WsdbPageLocationManager;
 
 /**
@@ -53,7 +55,7 @@ class WsdbConnectionAddForm extends AbstractFormBuilderForm implements IWsdbPage
         $this->canViewRecords();
         $this->readRecord();
 
-        if (!$this->getRecord()->canEdit()) {
+        if (!$this->getRecord()->canEdit() || !$this->getDatabase()->enableConnection) {
             throw new PermissionDeniedException();
         }
     }
@@ -79,7 +81,7 @@ class WsdbConnectionAddForm extends AbstractFormBuilderForm implements IWsdbPage
             FormContainer::create('data')
                 ->appendChildren([
                     SelectFormField::create('referencedDatabaseID')
-                        ->label('Datenbank')
+                        ->label('dev.hanashi.wsdb.connection.database')
                         ->options($this->getDatabaseOptions())
                         ->required(),
                     ...$this->getRecordSelects(),
@@ -126,6 +128,22 @@ class WsdbConnectionAddForm extends AbstractFormBuilderForm implements IWsdbPage
             $this->getRecord()->getCategory(),
             $this->getRecord()
         );
+    }
+
+    #[\Override]
+    public function assignVariables(): void
+    {
+        parent::assignVariables();
+
+        WCF::getTPL()->assign([
+            'connectionListLink' => LinkHandler::getInstance()->getControllerLink(
+                WsdbConnectionListPage::class,
+                [
+                    '__database' => $this->getRecord()->getDatabase()->path,
+                    'object' => $this->getRecord(),
+                ]
+            ),
+        ]);
     }
 
     /**
@@ -199,7 +217,11 @@ class WsdbConnectionAddForm extends AbstractFormBuilderForm implements IWsdbPage
             $databaseList->sqlOrderBy = 'name ASC';
             $databaseList->readObjects();
 
-            $this->databases = $databaseList->getObjects();
+            $databases = \array_filter(
+                $databaseList->getObjects(),
+                static fn (Database $database): bool => $database->enableConnection
+            );
+            $this->databases = $databases;
         }
 
         return $this->databases;
@@ -234,6 +256,9 @@ class WsdbConnectionAddForm extends AbstractFormBuilderForm implements IWsdbPage
 
             $groupedRecords = [];
             foreach ($recordList as $record) {
+                if (!$record->canEdit()) {
+                    continue;
+                }
                 $groupedRecords[$record->databaseID][$record->recordID] = $record->getTitle();
             }
             $this->groupedRecords = $groupedRecords;

@@ -6,6 +6,7 @@ use wcf\data\DatabaseObject;
 use wcf\data\wsdb\record\Record;
 use wcf\event\wsdb\interaction\user\RecordInteractionCollecting;
 use wcf\form\WsdbConnectionAddForm;
+use wcf\page\WsdbConnectionListPage;
 use wcf\system\interaction\AbstractInteraction;
 use wcf\system\request\LinkHandler;
 use wcf\system\WCF;
@@ -16,7 +17,7 @@ final class ConnectionWsdbRecordInteractionCollectingListener
     public function __invoke(RecordInteractionCollecting $event): void
     {
         $event->provider->addInteractionBefore(
-            new class('connection', static fn (Record $record) => $record->canEdit()) extends AbstractInteraction {
+            new class('connection', static fn (Record $record) => $record->canEdit() && $record->getDatabase()->enableConnection) extends AbstractInteraction {
                 #[\Override]
                 public function render(DatabaseObject $object): string
                 {
@@ -24,7 +25,12 @@ final class ConnectionWsdbRecordInteractionCollectingListener
 
                     return \sprintf(
                         '<a href="%s">%s</a>',
-                        StringUtil::encodeHTML($object->getEditFormLink()),
+                        StringUtil::encodeHTML(
+                            LinkHandler::getInstance()->getControllerLink(WsdbConnectionListPage::class, [
+                                '__database' => $object->getDatabase()->path,
+                                'object' => $object,
+                            ])
+                        ),
                         WCF::getLanguage()->get('wsdb.record.connections')
                     );
                 }
@@ -32,7 +38,7 @@ final class ConnectionWsdbRecordInteractionCollectingListener
             'edit'
         );
         $event->provider->addInteractionBefore(
-            new class('connectionAdd', static fn (Record $record) => $record->canEdit()) extends AbstractInteraction {
+            new class('connectionAdd', static fn (Record $record) => $record->canEdit() && $record->getDatabase()->enableConnection) extends AbstractInteraction {
                 #[\Override]
                 public function render(DatabaseObject $object): string
                 {
