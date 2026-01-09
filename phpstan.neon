@@ -1,5 +1,6 @@
 includes:
     - ../WCF/phpstan-ambient.neon
+    - phpstan-baseline.neon
 
 parameters:
     level: 6

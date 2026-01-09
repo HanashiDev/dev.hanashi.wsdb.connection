@@ -1,0 +1,27 @@
+parameters:
+	ignoreErrors:
+		-
+			message: '#^Access to an undefined property wcf\\data\\wsdb\\database\\Database\:\:\$enableConnection\.$#'
+			identifier: property.notFound
+			count: 1
+			path: files/lib/system/wsdb/gridView/user/ConnectionGridView.class.php
+		-
+			message: '#^Access to an undefined property wcf\\data\\wsdb\\database\\Database\:\:\$enableConnection\.$#'
+			identifier: property.notFound
+			count: 2
+			path: files/lib/system/event/listener/ConnectionWsdbRecordInteractionCollectingListener.class.php
+		-
+			message: '#^Access to an undefined property wcf\\data\\wsdb\\database\\Database\:\:\$enableConnection\.$#'
+			identifier: property.notFound
+			count: 1
+			path: files/lib/page/WsdbConnectionListPage.class.php
+		-
+			message: '#^Access to an undefined property wcf\\data\\wsdb\\database\\Database\:\:\$enableConnection\.$#'
+			identifier: property.notFound
+			count: 2
+			path: files/lib/form/WsdbConnectionAddForm.class.php
+		-
+			message: '#^Variable \$this might not be defined\.$#'
+			identifier: variable.undefined
+			count: 1
+			path: files/acp/install_dev.hanashi.wsdb.connection.php
