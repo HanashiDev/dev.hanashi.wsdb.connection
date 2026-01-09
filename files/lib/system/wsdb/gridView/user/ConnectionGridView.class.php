@@ -2,6 +2,7 @@
 
 namespace wcf\system\wsdb\gridView\user;
 
+use wcf\data\DatabaseObject;
 use wcf\data\DatabaseObjectList;
 use wcf\data\wsdb\database\I18nDatabaseList;
 use wcf\data\wsdb\record\connection\RecordConnection;
@@ -9,6 +10,7 @@ use wcf\data\wsdb\record\connection\RecordConnectionList;
 use wcf\data\wsdb\record\Record;
 use wcf\form\WsdbConnectionAddForm;
 use wcf\system\gridView\AbstractGridView;
+use wcf\system\gridView\AbstractGridViewRowLink;
 use wcf\system\gridView\GridViewColumn;
 use wcf\system\gridView\renderer\ObjectIdColumnRenderer;
 use wcf\system\gridView\renderer\PhraseColumnRenderer;
@@ -18,6 +20,7 @@ use wcf\system\view\filter\SelectFilter;
 use wcf\system\view\filter\TextFilter;
 use wcf\system\WCF;
 use wcf\system\wsdb\cache\runtime\RecordRuntimeCache;
+use wcf\util\StringUtil;
 
 /**
  * @extends AbstractGridView<RecordConnection, RecordConnectionList>
@@ -65,6 +68,23 @@ final class ConnectionGridView extends AbstractGridView
                 )
                 ->sortable(true, 'databaseName'),
         ]);
+
+        $this->addRowLink(
+            new class() extends AbstractGridViewRowLink {
+                #[\Override]
+                public function render(mixed $value, DatabaseObject $row, bool $isPrimaryColumn = false): string
+                {
+                    \assert($row instanceof RecordConnection);
+
+                    return \sprintf(
+                        '<a href="%s" class="gridView__rowLink" tabindex="%s">%s</a>',
+                        StringUtil::encodeHTML($row->getReferencedRecord()->getLink()),
+                        ($isPrimaryColumn ? '0' : '-1'),
+                        $value
+                    );
+                }
+            }
+        );
 
         $this->setDefaultSortField('title');
     }
