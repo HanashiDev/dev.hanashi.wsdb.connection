@@ -8,6 +8,7 @@ use wcf\data\wsdb\database\I18nDatabaseList;
 use wcf\data\wsdb\record\connection\RecordConnection;
 use wcf\data\wsdb\record\connection\RecordConnectionList;
 use wcf\data\wsdb\record\Record;
+use wcf\event\wsdb\gridView\user\ConnectionGridViewInitialized;
 use wcf\form\WsdbConnectionAddForm;
 use wcf\system\gridView\AbstractGridView;
 use wcf\system\gridView\AbstractGridViewRowLink;
@@ -20,6 +21,7 @@ use wcf\system\view\filter\SelectFilter;
 use wcf\system\view\filter\TextFilter;
 use wcf\system\WCF;
 use wcf\system\wsdb\cache\runtime\RecordRuntimeCache;
+use wcf\system\wsdb\interaction\user\ConnectionInteractions;
 use wcf\util\StringUtil;
 
 /**
@@ -86,6 +88,9 @@ final class ConnectionGridView extends AbstractGridView
             }
         );
 
+        $provider = new ConnectionInteractions();
+        $this->setInteractionProvider($provider);
+
         $this->setDefaultSortField('title');
     }
 
@@ -125,6 +130,12 @@ final class ConnectionGridView extends AbstractGridView
         ) AS databaseName";
 
         return $list;
+    }
+
+    #[\Override]
+    protected function getInitializedEvent(): ConnectionGridViewInitialized
+    {
+        return new ConnectionGridViewInitialized($this);
     }
 
     public function getConnectionAddFormLink(): string

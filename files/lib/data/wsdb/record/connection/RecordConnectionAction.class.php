@@ -3,6 +3,7 @@
 namespace wcf\data\wsdb\record\connection;
 
 use wcf\data\AbstractDatabaseObjectAction;
+use wcf\system\WCF;
 
 /**
  * @extends AbstractDatabaseObjectAction<RecordConnection, RecordConnectionEditor>
@@ -25,5 +26,18 @@ final class RecordConnectionAction extends AbstractDatabaseObjectAction
         ]);
 
         return parent::create();
+    }
+
+    #[\Override]
+    public function delete(): int
+    {
+        $sql = "DELETE FROM wcf1_wsdb_record_connection WHERE recordID = ? AND referencedRecordID = ?";
+        $statement = WCF::getDB()->prepare($sql);
+
+        foreach ($this->getObjects() as $object) {
+            $statement->execute([$object->referencedRecordID, $object->recordID]);
+        }
+
+        return parent::delete();
     }
 }
