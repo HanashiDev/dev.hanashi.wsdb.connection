@@ -7,5 +7,10 @@
 			<listenerclassname>wcf\system\event\listener\ConnectionWsdbDatabaseEditFormListener</listenerclassname>
 			<environment>admin</environment>
 		</eventlistener>
+		<eventlistener name="connectionWsdbRecordPageListener">
+			<eventclassname>wcf\page\WsdbRecordPage</eventclassname>
+			<eventname>assignVariables</eventname>
+			<listenerclassname>wcf\system\event\listener\ConnectionWsdbRecordPageListener</listenerclassname>
+		</eventlistener>
 	</import>
 </data>

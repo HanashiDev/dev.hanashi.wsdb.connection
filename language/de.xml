@@ -2,15 +2,16 @@
 <language xmlns="http://www.woltlab.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.woltlab.com http://www.woltlab.com/XSD/6.0/language.xsd" languagecode="de" languagename="Deutsch" countrycode="de">
 	<import>
 		<category name="dev.hanashi.wsdb">
-			<item name="dev.hanashi.wsdb.connection.enableConnection"><![CDATA[Verbindungen aktivieren]]></item>
+			<item name="dev.hanashi.wsdb.connection.enableConnection"><![CDATA[Verknüpfungen aktivieren]]></item>
 			<item name="dev.hanashi.wsdb.connection.noRecords"><![CDATA[Für die ausgewählte Datenbank gibt es derzeitig keine auswählbaren Einträge.]]></item>
 			<item name="dev.hanashi.wsdb.connection.record"><![CDATA[Eintrag]]></item>
-			<item name="dev.hanashi.wsdb.connection.alreadyConnected"><![CDATA[Dieser Eintrag ist bereits mit dem aktuellen Eintrag verbunden.]]></item>
+			<item name="dev.hanashi.wsdb.connection.alreadyConnected"><![CDATA[Dieser Eintrag ist bereits mit dem aktuellen Eintrag verknüpft.]]></item>
 			<item name="dev.hanashi.wsdb.connection.database"><![CDATA[Datenbank]]></item>
 		</category>
 		<category name="wsdb.record">
-			<item name="wsdb.record.connection.add"><![CDATA[Verbindung hinzufügen]]></item>
-			<item name="wsdb.record.connections"><![CDATA[Verbindungen]]></item>
+			<item name="wsdb.record.connection.add"><![CDATA[Verknüpfung hinzufügen]]></item>
+			<item name="wsdb.record.connections"><![CDATA[Verknüpfungen]]></item>
+			<item name="wsdb.record.connections.connected"><![CDATA[Verknüpfte]]></item>
 		</category>
 	</import>
 </language>
