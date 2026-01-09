@@ -50,7 +50,6 @@ return [
     PartialDatabaseTable::create('wcf1_wsdb_database')
         ->columns([
             TinyintDatabaseTableColumn::create('enableConnection')
-                ->length(1)
                 ->notNull()
                 ->defaultValue(0),
         ]),
