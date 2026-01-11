@@ -6,8 +6,8 @@
 		<packagename language="de">Database: Verbindungen</packagename>
 		<packagedescription>Mapping of connections between database entries.</packagedescription>
 		<packagedescription language="de">Abbildung von Verknüfungen zwischen Datenbank-Einträgen.</packagedescription>
-		<version>1.0.0</version>
-		<date>2026-01-09</date>
+		<version>1.0.1</version>
+		<date>2026-01-11</date>
 	</packageinformation>
 	<authorinformation>
 		<author>Hanashi Development</author>
@@ -29,5 +29,8 @@
 		<instruction type="templateListener"/>
 		<instruction type="database">acp/database/install_dev.hanashi.wsdb.connection.php</instruction>
 		<instruction type="script" run="standalone">acp/install_dev.hanashi.wsdb.connection.php</instruction>
+	</instructions>
+	<instructions type="update" fromversion="1.0.0">
+		<instruction type="file"/>
 	</instructions>
 </package>
