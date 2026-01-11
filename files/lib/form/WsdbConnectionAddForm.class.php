@@ -153,7 +153,6 @@ class WsdbConnectionAddForm extends AbstractFormBuilderForm implements IWsdbPage
     {
         $groupedRecords = $this->getRecordsGroupedByDatabases();
         $recordID = $this->getRecord()->recordID;
-        \uasort($groupedRecords[5], static fn (string $a, string $b): int => ($a == $b) ? 0 : (($a < $b) ? -1 : 1));
 
         return \array_map(
             static function (Database $database) use ($groupedRecords, $recordID): IFormChildNode {
